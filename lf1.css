@@ -35,3 +35,7 @@
 	height:100px;
 	display:inline-block;
 }
+
+.form-wrapper {
+	display:none;
+}
