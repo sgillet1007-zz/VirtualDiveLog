@@ -28,10 +28,19 @@
 		<h1 class="header">Virtual Dive Log </h1>
 		<div id="leaflet-map"></div>
 		<div id="bottom-control">
-			<button type="button" class="btn btn-link global-zoom">Global Zoom</button>
-			<button type="button" class="btn btn-primary edit-map">Edit Map</button>
+			<button type="button" class="btn btn-primary default-zoom">Zoom Default</button>
+			<button type="button" class="btn btn-primary global-zoom">Zoom Global</button>
+			<button type="button" class="btn btn-primary coz-zoom">Zoom to Cozumel</button>
+		</div>
 
-		<div>
+		<form class="form-inline">
+		  <div class="form-group">
+		  	<label>Date</label>
+		    <input type="date" class="form-control input-date" placeholder="Date">
+		  </div>
+		  <button type="submit" class="btn btn-default log-dive-submit">Log This Dive</button>
+		</form>
+		
 		<div id="log-book"></div>
 	
 	</body>

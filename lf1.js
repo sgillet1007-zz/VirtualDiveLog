@@ -3,9 +3,10 @@ $(document).on('ready', function(){
 var map = L.map('leaflet-map').setView([15,-68],4);
 // vv*****  GLOBAL VARIABLES *********************
 var diveTally = 1;
-var editMap = 0;
 var myDivePts = L.geoJson(); //myDivePts is a geoJson layer
+
 myDivePts.addTo(map);
+
 // ^^*********************************************
 map.on('click', onMapClick);
 // vv***** load tile layer *************
@@ -16,47 +17,49 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoic2dpbGxldDEwMDciLCJhIjoiMzQ4ZWE5YWNlZDQ3NmEzMzY0ZTk4ZDc2MWJjMWFjMDkifQ.M3cCfmaaAVzdYQfQ3fIDoQ'
 }).addTo(map);
 // ^^*********************************************
-// vv***** editMap button click handler **********
-$('.edit-map').on('click', function(){
-    console.log('button clicked');
-    if (!editMap){
-        editMap;
-    }
-    else{
-        !editMap;
-    }
-});
-// ^^**********************************************
+
 //vv***************** start onMapClick() function ***********************
 function onMapClick(e) {
     // if (editMap){
-    var diveNo = "Dive #" + diveTally
-    
+    console.log(e.latlng);
+    var diveNo = "Dive #" + diveTally;
+    var date = $('.input-date').val();
+    console.log(date);
     // create a geoJson object called currentDive
     var currentDive = {
         "type":"Feature",
         "properties": {
             "id": diveNo,
-            "popupContent": diveNo +'!'
+            "popupContent": diveNo +'!',
+            "date": date,
         },
         "geometry": {
             "type":"Point",
             "coordinates": [e.latlng.lng,e.latlng.lat]
         }
     }
-    // currentDive.bindPopup(currentDive.properties.popupContent);
     // add currentDive to myLayer
     myDivePts.addData(currentDive);
 
     // Adds .log-entry div to #logbook with content = diveTally
     $('#log-book').append('<div class="log-entry">'+ currentDive.properties.id 
+                            +'<br>Date: '+currentDive.properties.date
                             +'<br>Lat: '+ currentDive.geometry.coordinates[1]
-                            + '<br>Long: '+currentDive.geometry.coordinates[0]+'</div>');
+                            + '<br>Long: '+currentDive.geometry.coordinates[0]
+                            +'</div>');
     ++diveTally;
 // }
 }; //******************* ^^^ end onMapClick() function ^^^ ***********************
-
-
-
+// Zoom buttone JQ click handlers ******************vv
+$('.default-zoom').on('click',function(){
+    map.setView([15,-68],4);
+})
+$('.coz-zoom').on('click',function(){
+    map.setView([20.437307950568957,-86.91352844238281],10);
+})
+$('.global-zoom').on('click',function(){
+    map.setView([34.30714385628804,-19.335937499999996],1);
+})
+// *************************************************^^
 
 })
