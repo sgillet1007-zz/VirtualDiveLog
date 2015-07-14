@@ -27,20 +27,33 @@ function onMapClick(e) {
     // display input form
     $('.form-wrapper').css('display','inline-block');
 
-    var id = diveTally;
-    var diveString = "Dive #" + diveTally;
-    var date = $('.input-date').val();
-    var maxDepth =$('.input-maxDepth').val();
-    var viz = $('.input-viz').val();
-    var wTemp = $('.input-wTemp').val();
-    var timeIn = $('.input-timeIn').val();
-    var timeOut = $('.input-timeOut').val();
-    var psiStart = $('.input-psiStart').val();
-    var psiEnd = $('.input-psiEnd').val();
-    var verifNo = $('.input-verifNo').val();
-    var saltW = $('.input-salt').val();
-    var freshW = $('.input-fresh').val();
-        
+    // var id = null;
+    // var diveString = null;
+    // var date = null;
+    // var maxDepth = null;
+    // var viz = null;
+    // var wTemp = null;
+    // var timeIn = null;
+    // var timeOut = null;
+    // var psiStart = null;
+    // var psiEnd = null;
+    // var verifNo = null;
+    // var saltW = null;
+    // var freshW = null;
+        var id = diveTally;
+        var diveString = "Dive #" + diveTally;
+        var date = $('.input-date').val();
+        var maxDepth =$('.input-maxDepth').val();
+        var viz = $('.input-viz').val();
+        var wTemp = $('.input-wTemp').val();
+        var timeIn = $('.input-timeIn').val();
+        var timeOut = $('.input-timeOut').val();
+        var psiStart = $('.input-psiStart').val();
+        var psiEnd = $('.input-psiEnd').val();
+        var verifNo = $('.input-verifNo').val();
+        var saltW = $('.input-salt').val();
+        var freshW = $('.input-fresh').val();    
+       
         // create a geoJson object called currentDive
     var currentDive = {
         "type":"Feature",
@@ -63,8 +76,29 @@ function onMapClick(e) {
             "coordinates": [e.latlng.lng,e.latlng.lat],
         }
     }
-        // add currentDive to myLayer
+
     myDivePts.addData(currentDive);
+    // console.log(myDivePts);
+    
+    $('.submit-button').on('click',function(){
+        // assigns current input values to corresponsding local variables
+        // var id = diveTally;
+        // var diveString = "Dive #" + diveTally;
+        // var date = $('.input-date').val();
+        // var maxDepth =$('.input-maxDepth').val();
+        // var viz = $('.input-viz').val();
+        // var wTemp = $('.input-wTemp').val();
+        // var timeIn = $('.input-timeIn').val();
+        // var timeOut = $('.input-timeOut').val();
+        // var psiStart = $('.input-psiStart').val();
+        // var psiEnd = $('.input-psiEnd').val();
+        // var verifNo = $('.input-verifNo').val();
+        // var saltW = $('.input-salt').val();
+        // var freshW = $('.input-fresh').val();
+        
+        myDivePts.addData(currentDive);
+        console.log(myDivePts);
+    })
 
     // Adds .log-entry div to #logbook with content = diveTally
     // TO DO: only do JQ below on submit button on.click...
@@ -74,7 +108,6 @@ function onMapClick(e) {
     //                             + '<br>Long: '+currentDive.geometry.coordinates[0]
     //                             +'</div>');
     ++diveTally;
-    console.log(myDivePts)
 }; //******************* ^^^ end onMapClick() function ^^^ ***********************
 
 // Zoom buttone JQ click handlers ******************vv
