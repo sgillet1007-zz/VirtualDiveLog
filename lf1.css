@@ -39,3 +39,16 @@
 .form-wrapper {
 	display:none;
 }
+
+.submit-button {
+	display:inline-block;
+	height:40px;
+	width:110px;
+	color:darkblue;
+	background-color: lightblue;
+	text-align:center;
+	font-size:24px;
+	font-weight: bolder;
+	border-radius: 5px;
+
+}
