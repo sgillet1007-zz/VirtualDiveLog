@@ -5,11 +5,10 @@ var map = L.map('leaflet-map').setView([15,-68],4);
 // initialize global diveTally
 var diveTally = 1;
 
-// initialize empty geoJson
-var myDivePts = L.geoJson(); //myDivePts is a geoJson layer
+map.on('click', onMapClick);
 
-// add geoJson layer to map
-myDivePts.addTo(map);
+// create empty array to place currentDive objects into
+var myDiveArray = [];
 
 // vv***** load mapbox tile layer *************
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -19,30 +18,29 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoic2dpbGxldDEwMDciLCJhIjoiMzQ4ZWE5YWNlZDQ3NmEzMzY0ZTk4ZDc2MWJjMWFjMDkifQ.M3cCfmaaAVzdYQfQ3fIDoQ'
 }).addTo(map);
 
-// runs onMapClick when map is clicked
-map.on('click', onMapClick);
+
+// listner for New Dive button click
+$('.new-form-button').on('click',function(){
+        // shows form when New Dive button is clicked
+        $('.form-wrapper').css('display','block');
+        // reset form input values
+        $('.input-date').val(undefined);
+        $('.input-location').val(undefined);
+        $('.input-timeIn').val(undefined);
+        $('.input-timeOut').val(undefined);
+        $('.input-verifNo').val(undefined);
+        $('.input-salt').val(undefined);
+        $('.input-notes').val(undefined);
+})
 
 //vv*** start onMapClick() function **************
 function onMapClick(e) {
     // display input form
-    $('.form-wrapper').css('display','inline-block');
-
-    // var id = null;
-    // var diveString = null;
-    // var date = null;
-    // var maxDepth = null;
-    // var viz = null;
-    // var wTemp = null;
-    // var timeIn = null;
-    // var timeOut = null;
-    // var psiStart = null;
-    // var psiEnd = null;
-    // var verifNo = null;
-    // var saltW = null;
-    // var freshW = null;
         var id = diveTally;
         var diveString = "Dive #" + diveTally;
         var date = $('.input-date').val();
+        var location = $('.input-location').val();
+        var type = $('.input-type').val();
         var maxDepth =$('.input-maxDepth').val();
         var viz = $('.input-viz').val();
         var wTemp = $('.input-wTemp').val();
@@ -51,16 +49,18 @@ function onMapClick(e) {
         var psiStart = $('.input-psiStart').val();
         var psiEnd = $('.input-psiEnd').val();
         var verifNo = $('.input-verifNo').val();
-        var saltW = $('.input-salt').val();
-        var freshW = $('.input-fresh').val();    
+        var saltW = $('.input-salt').val(); 
+        var notes =$('.input-notes').val();   
        
-        // create a geoJson object called currentDive
+    // create a geoJson object called currentDive
     var currentDive = {
         "type":"Feature",
         "properties": {
             "id": diveString,
-            "popupContent": diveString,
+            "popupContent": diveString+"<br>"+date+"<br>"+location,
             "date": date,
+            "location":location,
+            "type":type,
             "maxDepth": maxDepth,
             "viz": viz,
             "wTemp": wTemp,
@@ -69,37 +69,40 @@ function onMapClick(e) {
             "psiStart":psiStart,
             "verifNo":verifNo,
             "saltW":saltW,
-            "freshW":freshW,
+            "notes":notes,
         },
         "geometry": {
             "type":"Point",
             "coordinates": [e.latlng.lng,e.latlng.lat],
         }
     }
+    // add currentDive to myDivePts
+    // myDivePts.addData(currentDive);
 
-    myDivePts.addData(currentDive);
-    // console.log(myDivePts);
+    myDiveArray.push(currentDive);
+    var marker = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
+    marker.bindPopup(""+currentDive.properties.popupContent).openPopup();
+    console.log(myDiveArray);
     
-    $('.submit-button').on('click',function(){
-        // assigns current input values to corresponsding local variables
-        // var id = diveTally;
-        // var diveString = "Dive #" + diveTally;
-        // var date = $('.input-date').val();
-        // var maxDepth =$('.input-maxDepth').val();
-        // var viz = $('.input-viz').val();
-        // var wTemp = $('.input-wTemp').val();
-        // var timeIn = $('.input-timeIn').val();
-        // var timeOut = $('.input-timeOut').val();
-        // var psiStart = $('.input-psiStart').val();
-        // var psiEnd = $('.input-psiEnd').val();
-        // var verifNo = $('.input-verifNo').val();
-        // var saltW = $('.input-salt').val();
-        // var freshW = $('.input-fresh').val();
-        
-        myDivePts.addData(currentDive);
-        console.log(myDivePts);
-    })
+    ++diveTally;
 
+    // hide form
+    $('.form-wrapper').css('display','none');
+}; //******************* ^^^ end onMapClick() function ^^^ ***********************
+
+// Zoom button JQ click handlers ******************vv
+// $('.default-zoom').on('click',function(){
+//     map.setView([15,-68],4);
+// })
+// $('.coz-zoom').on('click',function(){
+//     map.setView([20.437307950568957,-86.91352844238281],10);
+// })
+// $('.global-zoom').on('click',function(){
+//     map.setView([34.30714385628804,-19.335937499999996],2);
+// })
+// *************************************************^^
+
+ // console.log(myDivePts);
     // Adds .log-entry div to #logbook with content = diveTally
     // TO DO: only do JQ below on submit button on.click...
     // $('#log-book').append('<div class="log-entry">'+ currentDive.properties.popupContent 
@@ -107,19 +110,5 @@ function onMapClick(e) {
     //                             +'<br>Lat: '+ currentDive.geometry.coordinates[1]
     //                             + '<br>Long: '+currentDive.geometry.coordinates[0]
     //                             +'</div>');
-    ++diveTally;
-}; //******************* ^^^ end onMapClick() function ^^^ ***********************
-
-// Zoom buttone JQ click handlers ******************vv
-$('.default-zoom').on('click',function(){
-    map.setView([15,-68],4);
-})
-$('.coz-zoom').on('click',function(){
-    map.setView([20.437307950568957,-86.91352844238281],10);
-})
-$('.global-zoom').on('click',function(){
-    map.setView([34.30714385628804,-19.335937499999996],1);
-})
-// *************************************************^^
 
 })

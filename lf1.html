@@ -3,7 +3,7 @@
 	
 	<head>
 		
-		<title>Virtual Dive Log</title>
+		<title>Virtual Dive Logbook</title>
 		
 		<!-- links to stylesheets -->
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
@@ -20,129 +20,148 @@
 			</script>
 		<script src="lf1.js">
 			</script>
-
 	</head>
 
 	<body>
-
-		<h1 class="header">Virtual Dive Log </h1>
-		<div id="leaflet-map"></div>
-		<div id="bottom-control">
-			<button type="button" class="btn btn-primary default-zoom">Zoom Default</button>
-			<button type="button" class="btn btn-primary global-zoom">Zoom Global</button>
-			<button type="button" class="btn btn-primary coz-zoom">Zoom to Cozumel</button>
-		</div>
-		
-		<div class="form-wrapper">
-			<form class="form-inline">
-				<!--********** first form input element **********-->
-			  	<div class="form-group">
-			  		<label>Date</label>
-			    	<input type="date" class="form-control input-date" placeholder="Date">
-			   </div>
-			   
-			   <div class="form-group">
-			  		<label>Max Depth (ft)</label>
-			    	<select class="form-control input-maxDepth">
-				    	<option>20</option>
-				    	<option>30</option>
-				    	<option>40</option>
-				    	<option>50</option>
-				    	<option>60</option>
-				    	<option>70</option>
-				    	<option>80</option>
-				    	<option>90</option>
-				    	<option>100</option>
-				    	<option>110</option>
-				    	<option>120</option>
-				    </select>
+		<div class='map-section'>
+			<div class="banner">
+				<div class="image-wrapper dive-flag">
+					<img src="diveFlag.png" width="50" height ="50" style="float:right;margin:20px"/>
 				</div>
-
-				<div class="form-group">
-			  		<label>Visibility (ft)</label>
-			  		<select class="form-control input-viz">
-				    	<option>20</option>
-				    	<option>30</option>
-				    	<option>40</option>
-				    	<option>50</option>
-				    	<option>60</option>
-				    	<option>70</option>
-				    	<option>80</option>
-				    	<option>90</option>
-				    	<option>100</option>
-				    	<option>110</option>
-				    	<option>120</option>
-				    </select>
-			  	</div>
-
-			  	<div class="form-group">
-			  		<label>Water Temperature (F)</label>
-			  		<select class="form-control input-wTemp">
-				    	<option>60</option>
-				    	<option>65</option>
-				    	<option>70</option>
-				    	<option>75</option>
-				    	<option>80</option>
-				    	<option>85</option>
-				    </select>
-			  	</div>
-				
-				<div class="form-group">
-					<label>Time In</label>
-					<input type="time" class="form-control input-timeIn" placeholder="Time In">
+				<div class="title-wrapper">
+					<h1 class="header">Virtual Dive Logbook</h1>
 				</div>
-
-				<div class="form-group">
-					<label>Time Out</label>
-					<input type="time" class="form-control input-timeOut" placeholder="Time Out">
+				<div class="image-wrapper diver">
+					<img src="diver.png" width="50" height ="50" style="float:left;margin:20px"/>
 				</div>
-
-				<div class="form-group">
-			  		<label>psi Start</label>
-			  		<select class="form-control input-psiStart">
-				    	<option>3200</option>
-				    	<option>3100</option>
-				    	<option>3000</option>
-				    	<option>2900</option>
-				    	<option>2800</option>
-				    	<option>2700</option>
-				    </select>
-			  	</div>
-
-			  	<div class="form-group">
-			  		<label>psi End</label>
-			  		<select class="form-control input-psiStart">
-				    	<option>300</option>
-				    	<option>400</option>
-				    	<option>500</option>
-				    	<option>600</option>
-				    	<option>700</option>
-				    	<option>800</option>
-				    </select>
-			  	</div>
-
-			  	<div class="form-group">
-					<label>Verification Cert. #</label>
-					<input type="text" class="form-control input-verifNo" placeholder="Buddy Certification #">
-				</div>
-
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" class="input-salt" value="">
-						Saltwater
-					</label>
-				</div>
-
-				<div class="checkbox">
-					<label>
-						<input type="checkbox" class="input-salt" value="">
-						Freshwater
-					</label>
-				</div>
-				<!-- **********last form input element **********-->
-			</form>
-			<div class="submit-button">Log Dive</div>
-		</div>
+				<!-- add padi flag and diver logo on both sides of h1 -->
+			</div>
+			<div class="form-wrapper">
+				<h3>1. Fill out the dive details below</h3>
+				<form class="form-inline">
+				  	<div class="form-group">
+				  		<label>Date</label>
+				    	<input type="date" class="form-control input-date" placeholder="Date">
+				   </div>
+				   <!-- add location text input -->
+				   <div class="form-group">
+				  		<label>Location</label>
+				    	<input type="text" class="form-control input-location" placeholder="Location">
+				   </div>
+				   <!-- add type select input... boat, shore-->
+				   <div class="form-group">
+				  		<label>Type</label>
+				    	<select class="form-control input-type">
+					    	<option>boat</option>
+					    	<option>liveaboard</option>
+					    	<option>shore</option>
+					    	<option>inland</option>
+					    </select>
+					</div>
+				   <div class="form-group">
+				  		<label>Max Depth (ft)</label>
+				    	<select class="form-control input-maxDepth">
+					    	<option>20</option>
+					    	<option>30</option>
+					    	<option>40</option>
+					    	<option>50</option>
+					    	<option>60</option>
+					    	<option>70</option>
+					    	<option>80</option>
+					    	<option>90</option>
+					    	<option>100</option>
+					    	<option>110</option>
+					    	<option>120</option>
+					    </select>
+					</div>
+					<div class="form-group">
+				  		<label>Visibility (ft)</label>
+				  		<select class="form-control input-viz">
+					    	<option>20</option>
+					    	<option>30</option>
+					    	<option>40</option>
+					    	<option>50</option>
+					    	<option>60</option>
+					    	<option>70</option>
+					    	<option>80</option>
+					    	<option>90</option>
+					    	<option>100</option>
+					    	<option>110</option>
+					    	<option>120</option>
+					    </select>
+				  	</div>
+				  	<div class="form-group">
+				  		<label>Water Temperature (F)</label>
+				  		<select class="form-control input-wTemp">
+					    	<option>60</option>
+					    	<option>65</option>
+					    	<option>70</option>
+					    	<option>75</option>
+					    	<option>80</option>
+					    	<option>85</option>
+					    </select>
+				  	</div>
+					<div class="form-group">
+						<label>Time In</label>
+						<input type="time" class="form-control input-timeIn" placeholder="Time In">
+					</div>
+					<div class="form-group">
+						<label>Time Out</label>
+						<input type="time" class="form-control input-timeOut" placeholder="Time Out">
+					</div>
+					<div class="form-group">
+				  		<label>psi Start</label>
+				  		<select class="form-control input-psiStart">
+					    	<option>3200</option>
+					    	<option>3100</option>
+					    	<option>3000</option>
+					    	<option>2900</option>
+					    	<option>2800</option>
+					    	<option>2700</option>
+					    </select>
+				  	</div>
+				  	<div class="form-group">
+				  		<label>psi End</label>
+				  		<select class="form-control input-psiStart">
+					    	<option>300</option>
+					    	<option>400</option>
+					    	<option>500</option>
+					    	<option>600</option>
+					    	<option>700</option>
+					    	<option>800</option>
+					    </select>
+				  	</div>
+				  	<div class="form-group">
+						<label>Verification Cert. #</label>
+						<input type="text" class="form-control input-verifNo" placeholder="Buddy Certification #">
+					</div>
+					<div class="form-group">
+				  		<label>Water Type</label>
+				  		<select class="form-control input-salt">
+					    	<option>saltwater</option>
+					    	<option>freshwater</option>
+					    </select>
+				  	</div>
+				</form>
+				<form class="form-horizontal" role="form">
+						<div class="form-group">
+  							<label for="note">Notes:</label>
+  							<textarea class="form-control input-notes" rows="3" id="note"></textarea>
+						</div>
+					</form>
+				<h3>2. Zoom/Pan/Click on the map to mark the dive location</h3>
+			</div>
+			<div id="leaflet-map"></div>
+			<!-- Commented out zoom buttons to de-clutter -->
+			<!-- <div id="bottom-control">
+				<button type="button" class="btn btn-primary default-zoom">Zoom Default</button>
+				<button type="button" class="btn btn-primary global-zoom">Zoom Global</button>
+				<button type="button" class="btn btn-primary coz-zoom">Zoom to Cozumel</button>
+			</div> -->
+			<div class="bottom-control">
+				<div class="new-form-button">New Dive</div>
+			</div>
+		</div> <!-- end map section -->
 		
 		<div id="log-book"></div>
 	
