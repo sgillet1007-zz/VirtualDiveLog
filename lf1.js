@@ -18,6 +18,24 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={
     accessToken: 'pk.eyJ1Ijoic2dpbGxldDEwMDciLCJhIjoiMzQ4ZWE5YWNlZDQ3NmEzMzY0ZTk4ZDc2MWJjMWFjMDkifQ.M3cCfmaaAVzdYQfQ3fIDoQ'
 }).addTo(map);
 
+// dive time helper function. inputs start and end time strings. returns a number (minutes the dive lasted).
+var diveTime = function(timeIn,timeOut){
+    var hoursIn = Number(timeIn.slice(0,2));
+    var minsIn = Number(timeIn.slice(3));
+    var startMins = (hoursIn*60)+minsIn;
+    var hoursOut = Number(timeOut.slice(0,2));
+    var minsOut = Number(timeOut.slice(3));
+    var endMins = (hoursOut*60)+minsOut;
+    var diveMins = endMins - startMins;
+    return diveMins;
+}
+// psi consumed helper function. inputs start and end psi strings. returns a number (psi used).
+var psiUsed = function(psiIn, psiOut){
+    var psiIn = Number(psiIn);
+    var psiOut = Number(psiOut);
+    var psiUsed = psiIn - psiOut;
+    return psiUsed;
+}
 
 // listner for New Dive button click
 $('.new-form-button').on('click',function(){
@@ -50,7 +68,9 @@ function onMapClick(e) {
         var psiEnd = $('.input-psiEnd').val();
         var verifNo = $('.input-verifNo').val();
         var saltW = $('.input-salt').val(); 
-        var notes =$('.input-notes').val();   
+        var notes =$('.input-notes').val();
+        var diveMins = diveTime(timeIn,timeOut);
+        var psiConsumed = psiUsed(psiStart,psiEnd);  
        
     // create a geoJson object called currentDive
     var currentDive = {
@@ -67,17 +87,18 @@ function onMapClick(e) {
             "timeIn":timeIn,
             "timeOut":timeOut,
             "psiStart":psiStart,
+            "psiEnd":psiEnd,
             "verifNo":verifNo,
             "saltW":saltW,
             "notes":notes,
+            "diveMins":diveMins,
+            "psiUsed":psiConsumed,
         },
         "geometry": {
             "type":"Point",
             "coordinates": [e.latlng.lng,e.latlng.lat],
         }
     }
-    // add currentDive to myDivePts
-    // myDivePts.addData(currentDive);
 
     myDiveArray.push(currentDive);
     var marker = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
@@ -89,6 +110,8 @@ function onMapClick(e) {
     // hide form
     $('.form-wrapper').css('display','none');
 }; //******************* ^^^ end onMapClick() function ^^^ ***********************
+
+
 
 // Zoom button JQ click handlers ******************vv
 // $('.default-zoom').on('click',function(){
