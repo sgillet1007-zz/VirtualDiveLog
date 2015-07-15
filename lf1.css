@@ -30,8 +30,6 @@
 			.dive-flag{
 				float:left;
 			}
-
-
 	#leaflet-map {
 		display: block;
 		margin: 0 auto;
@@ -61,11 +59,22 @@
 		display:none;
 		width: 80%;
 		margin:20px auto;
+		overflow:hidden;
+	}
+
+	.form-instructions {
+		font-size:24px;
+		color:blue;
+		font-weight:bolder;
+		display:block;
+		/*float:left;*/
+
 	}
 
 	.margin5px {
 		margin:5px;
 	}
+
 #log-book {
 	position:relative;
 	width: 90%;

@@ -34,21 +34,19 @@
 				<div class="image-wrapper diver">
 					<img src="diver.png" width="50" height ="50" style="float:left;margin:20px"/>
 				</div>
-				<!-- add padi flag and diver logo on both sides of h1 -->
 			</div>
+
 			<div class="form-wrapper">
-				<h3>1. Fill out the dive details below</h3>
+					<p class="form-instructions">1. Fill out the dive details below</p>
 				<form class="form-inline">
 				  	<div class="form-group margin5px">
 				  		<label>Date</label>
 				    	<input type="date" class="form-control input-date" placeholder="Date">
 				   </div>
-				   <!-- add location text input -->
 				   <div class="form-group margin5px">
 				  		<label>Location</label>
 				    	<input type="text" class="form-control input-location" placeholder="Location">
 				   </div>
-				   <!-- add type select input... boat, shore-->
 				   <div class="form-group margin5px">
 				  		<label>Type</label>
 				    	<select class="form-control input-type">
@@ -58,7 +56,7 @@
 					    	<option>inland</option>
 					    </select>
 					</div>
-				   <div class="form-group margin5px">
+				   	<div class="form-group margin5px">
 				  		<label>Max Depth (ft)</label>
 				    	<select class="form-control input-maxDepth">
 					    	<option>20</option>
@@ -143,13 +141,13 @@
 					    </select>
 				  	</div>
 				</form>
-				<form class="form-horizontal" role="form">
-						<div class="form-group">
-  							<label for="note">Notes:</label>
-  							<textarea class="form-control input-notes" rows="3" id="note"></textarea>
-						</div>
-					</form>
-				<h3>2. Zoom/Pan/Click on the map to mark the dive location</h3>
+				<form>
+					<div class="form-group margin5px">
+  						<label for="note">Notes:</label>
+  						<textarea class="form-control input-notes" rows="2" id="note"></textarea>
+					</div>
+				</form>
+				<p class="form-instructions">2. Click on the map to mark the dive location</p>
 			</div>
 			<div id="leaflet-map"></div>
 			<!-- Commented out zoom buttons to de-clutter -->
