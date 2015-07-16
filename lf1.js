@@ -65,17 +65,17 @@ var roundTenths = function(num){
 }
 
 // listner for New Dive button click
-$('.new-form-button').on('click',function(){
-        // shows form when New Dive button is clicked
-        $('.form-wrapper').show(1000);
-        // reset form input values
-        $('.input-date').val(undefined);
-        $('.input-location').val(undefined);
-        $('.input-timeIn').val(undefined);
-        $('.input-timeOut').val(undefined);
-        $('.input-verifNo').val(undefined);
-        $('.input-salt').val(undefined);
-        $('.input-notes').val(undefined);
+$('.new-form-button').on('click',function(){   
+    // shows form when New Dive button is clicked
+    $('.form-wrapper').show(1000);
+    // reset form input values
+    $('.input-date').val(undefined);
+    $('.input-location').val(undefined);
+    $('.input-timeIn').val(undefined);
+    $('.input-timeOut').val(undefined);
+    $('.input-verifNo').val(undefined);
+    $('.input-salt').val(undefined);
+    $('.input-notes').val(undefined);
 })
 
 //vv*** start onMapClick() function **************
@@ -100,6 +100,7 @@ function onMapClick(e) {
         var psiConsumed = psiUsed(psiStart,psiEnd); 
         var diveHours = (diveMins/60);
         var diveAirCons = (psiConsumed/diveMins);
+        var diveAirConsR = Math.round(diveAirCons);
        
     // create a geoJson object called currentDive
     var currentDive = {
@@ -107,9 +108,10 @@ function onMapClick(e) {
         "properties": {
             "id": diveString,
             "popupContent": diveString+"<br>"+date+"<br>"+location,
+            "headerContent": diveString + '&nbsp || &nbsp' + location + '&nbsp || &nbsp' + date,
             "date": date,
             "location":location,
-            "type":type,
+            "typeD":type,
             "maxDepth": maxDepth,
             "viz": viz,
             "wTemp": wTemp,
@@ -124,17 +126,18 @@ function onMapClick(e) {
             "psiUsed":psiConsumed,
             "diveHours":diveHours,
             "diveAirCons":diveAirCons,
+            "diveAirConsR":diveAirConsR,
         },
         "geometry": {
             "type":"Point",
             "coordinates": [e.latlng.lng,e.latlng.lat],
         }
     }
+// specify popup options 
 
     myDiveArray.push(currentDive);
     var marker = L.marker([e.latlng.lat,e.latlng.lng]).addTo(map);
     marker.bindPopup(""+currentDive.properties.popupContent).openPopup();
-
 
     airConsArray.push(currentDive.properties.diveAirCons);
     airConsAvg = arrayAvg(airConsArray);
@@ -142,6 +145,7 @@ function onMapClick(e) {
     diveTimeTot += currentDive.properties.diveHours;
     diveTimeTotR = roundTenths(diveTimeTot);
 
+    // if divTally > 1, replaces stats values instead of appending values.
     if (diveTally === 1){
         $('.diveTime-stat').after('<p class="stats-val dt">' + ' ' + diveTimeTotR + '</p>');
         $('.airCons-stat').after('<p  class="stats-val ac">' + ' ' + airConsAvg + '</p>');
@@ -153,15 +157,18 @@ function onMapClick(e) {
 
     ++diveTally;
 
-    $('#log-book').append('<div class="log-entry">'+ currentDive.properties.popupContent +'</div>');
-
     // hide form
     $('.form-wrapper').hide(1000);
 
-    console.log('lat: ' + e.latlng.lat + 'long: ' + e.latlng.lng)
+    $('#log-book').prepend('<div class="log-record"><div class="log-record-header"><div class="bloghead">'+ currentDive.properties.headerContent +'</div></div><div class="log-record-details"><div class="row"><div class="col-sm-4"></div><div class="col-sm-4"><strong>'+ currentDive.properties.id +'</strong></div><div class="col-sm-4"></div></div><div class="row"><div class="col-sm-3"><strong>&nbsp Time In: </strong>' + currentDive.properties.timeIn + '</div><div class="col-sm-3"><strong> Time Out:  </strong>'+ currentDive.properties.timeOut + '</div><div class="col-sm-6"><strong> Dive Duration (mins): </strong>'+ currentDive.properties.diveMins + '</div></div><div class="row"><div class="col-sm-3"><strong>&nbsp Max. Depth:  </strong>'+ currentDive.properties.maxDepth + '</div><div class="col-sm-3"><strong> Visibility (ft): </strong>'+ currentDive.properties.viz + '</div><div class="col-sm-6"><strong> Water Temp. (F): </strong>'+ currentDive.properties.wTemp + '</div></div><div class="row"><div class="col-sm-3"><strong>&nbsp psi Start: </strong>'+ currentDive.properties.psiStart + '</div><div class="col-sm-3"><strong> psi End: </strong>'+ currentDive.properties.psiEnd + '</div><div class="col-sm-6"><strong> Air Consumption Rate (psi/min): </strong>'+ currentDive.properties.diveAirConsR + '</div></div><div class="row"><div class="col-sm-3"><strong>&nbsp Dive Type: </strong>'+ currentDive.properties.typeD + '</div><div class="col-sm-3"><strong> Water Type: </strong>'+ currentDive.properties.saltW + '</div><div class="col-sm-6"><strong> Verification #: </strong>'+ currentDive.properties.verifNo + '</div></div><div class="row"><div class="col-sm-12"><strong>&nbsp Notes: </strong>'+ currentDive.properties.notes + '</div></div></div></div>');
 }; //******************* ^^^ end onMapClick() function ^^^ ***********************
 
-// Zoom button JQ click handlers ******************vv
+// delegated event adds. when this was inside mapclick and not delegated, a listener got added to each header on each map click
+$(document).on('click','.log-record-header',function(){
+        $(this).siblings().toggle(600);
+})
+
+// ****Zoom button JQ click handlers ******************vv
 $('.default-zoom').on('click',function(){
     map.setView([15,-68],4);
 })
@@ -181,10 +188,5 @@ $('.cura-zoom').on('click',function(){
     map.setView([12.17,-68.7],8);
 })
 // *************************************************^^
-
- // console.log(myDivePts);
-    // Adds .log-entry div to #logbook with content = diveTally
-    // TO DO: only do JQ below on submit button on.click...
-   
 
 })

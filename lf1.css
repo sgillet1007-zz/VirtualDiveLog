@@ -63,6 +63,7 @@
 		font-weight: bolder;
 		border-radius: 5px;
 		border:2px solid darkblue;
+		box-shadow:5px 5px 5px #888888;
 	}
 	.form-wrapper {
 		display:none;
@@ -89,6 +90,8 @@
 	height:75px;
 	background-color:white;
 	border:1px solid darkgrey;
+	opacity:0.5;
+	border-radius:5px;
 }
 
 .dive-stats-header {
@@ -134,13 +137,30 @@
 	/*height:100px;*/
 	display:block;
 	/*border:1px solid grey;*/
-	margin:5%;
+	margin:20px auto;
 }
-.log-entry {
+.log-record-header {
 	margin: 5px auto;
-	border: 1px solid grey;
-	width:90%;
-	height:100px;
-	display:inline-block;
+	border: 2px solid darkblue;
+	width:65em;
+	height:30px;
+	display:block;
+	color:darkblue;
+	background-color:lightblue;
+	border-radius:5px;
 }
+.log-record-details {
+	width:60em;
+	height:140px;
+	border:1px solid grey;
+	display:none;
+	margin: 0px auto;
+	background-color:white;
+}
+
+.bloghead {
+	margin:2px 0px 0px 5px;
+	font-weight:bolder;
+}
+
 
