@@ -149,20 +149,26 @@
 				</form>
 				<p class="form-instructions">2. Click on the map to mark the dive location</p>
 			</div>
+			<div class="zoom-container">
+				<button type="button" class="btn btn-primary btn-xs default-zoom">Default Zoom</button>
+				<button type="button" class="btn btn-primary btn-xs coz-zoom">Cozumel</button>
+				<button type="button" class="btn btn-primary btn-xs cuba-zoom">Cuba</button>
+				<button type="button" class="btn btn-primary btn-xs cura-zoom">Curacao</button>
+				<button type="button" class="btn btn-primary btn-xs gbr-zoom">Great Barrier Reef</button>
+				<button type="button" class="btn btn-primary btn-xs global-zoom">Global</button>
+
+			</div>
 			<div id="leaflet-map"></div>
-			<!-- Commented out zoom buttons to de-clutter -->
-			<!-- <div id="bottom-control">
-				<button type="button" class="btn btn-primary default-zoom">Zoom Default</button>
-				<button type="button" class="btn btn-primary global-zoom">Zoom Global</button>
-				<button type="button" class="btn btn-primary coz-zoom">Zoom to Cozumel</button>
-			</div> -->
 			<div class="bottom-control">
 				<div class="new-form-button">New Dive</div>
 			</div>
 		</div> <!-- end map section -->
-		
+		<div class="dive-stats">
+			<h4 class="dive-stats-header">Cumulative Dive Stats</h4>
+			<div class="stats-dive-time"><p class="stats-text diveTime-stat">Total Dive Time (hours):</p></div>
+			<div class="stats-air-consump"><p class="stats-text airCons-stat">Average Air Consumption (psi/min):</p></div>
+		</div>
 		<div id="log-book"></div>
-	
 	</body>
 
 </html>
