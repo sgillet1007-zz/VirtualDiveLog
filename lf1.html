@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html>
-	
 	<head>
-		
 		<title>Virtual Dive Logbook</title>
-		
-		<!-- links to stylesheets -->
 		<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 		<link rel="stylesheet" href="leaflet.css"/>
 		<link rel="stylesheet" href="MarkerCluster.css"/>
 		<link rel="stylesheet" href="lf1.css"/>
-		
-		<!-- links to js script files -->
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js">
-			</script>
-		<script src="leaflet.js">
-			</script>
-		<script src="leaflet.markercluster.js">
-			</script>
-		<script src="lf1.js">
-			</script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+		<script src="leaflet.js"></script>
+		<script src="leaflet.markercluster.js"></script>
+		<script src="lf1.js"></script>
 	</head>
-
 	<body class="body">
 		<div class='map-section'>
 			<div class="banner">
@@ -35,9 +24,8 @@
 					<img src="diver.png" width="70" height ="60" style="float:left;margin:10px"/>
 				</div>
 			</div>
-
 			<div class="form-wrapper">
-					<p class="form-instructions">1. Fill out the dive details below</p>
+					<p class="form-instructions">1. Fill out the dive details below...</p>
 				<form class="form-inline">
 				  	<div class="form-group margin5px">
 				  		<label>Date</label>
@@ -147,7 +135,7 @@
   						<textarea class="form-control input-notes" rows="2" id="note"></textarea>
 					</div>
 				</form>
-				<p class="form-instructions">2. Click on the map to mark the dive location</p>
+				<p class="form-instructions">2. Click on the map to mark the dive location!</p>
 			</div>
 			<div class="zoom-container">
 				<button type="button" class="btn btn-primary btn-xs default-zoom">Default Zoom</button>
@@ -156,13 +144,12 @@
 				<button type="button" class="btn btn-primary btn-xs cura-zoom">Curacao</button>
 				<button type="button" class="btn btn-primary btn-xs gbr-zoom">Great Barrier Reef</button>
 				<button type="button" class="btn btn-primary btn-xs global-zoom">Global</button>
-
 			</div>
 			<div id="leaflet-map"></div>
 			<div class="bottom-control">
 				<div class="new-form-button">New Dive</div>
 			</div>
-		</div> <!-- end map section -->
+		</div>
 		<div class="dive-stats">
 			<h4 class="dive-stats-header">Cumulative Dive Statistics</h4>
 			<div class="stats-dive-time"><p class="stats-text diveTime-stat">Total Dive Time (hours):</p></div>
@@ -170,5 +157,4 @@
 		</div>
 		<div id="log-book"></div>
 	</body>
-
 </html>
